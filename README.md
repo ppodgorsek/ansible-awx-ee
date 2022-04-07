@@ -6,11 +6,11 @@ This project contains the configuration of an Ansible AWX Execution Environment 
 
 It is based on the official Ansible AWX EE image and mainly includes:
 
-* Cloud provider libraries:
+* Cloud provider dependencies:
 
-    * Amazon Web Services (AWS) 3.2.0
-    * Google Cloud Platform (GCP) 1.0.1
-    * Microsoft Azure 1.12.0
+    * Amazon Web Services (AWS)
+    * Google Cloud Platform (GCP)
+    * Microsoft Azure
 
 * Kubernetes
 * PostgreSQL 14
@@ -54,15 +54,15 @@ Depending on your needs, the following collections are supported and can be adde
 
 * Cloud providers:
 
-    * AWS: `amazon.aws`
-    * Azure: `azure.azcollection`
-    * GCP: `google.cloud`
+    * [AWS](https://galaxy.ansible.com/amazon/aws): `amazon.aws`
+    * [Azure](https://galaxy.ansible.com/azure/azcollection): `azure.azcollection`
+    * [GCP](https://galaxy.ansible.com/google/cloud): `google.cloud`
 
-* Cryptography: `community.crypto`
-* General: `community.general`
-* Kubernetes: `kubernetes.core`
-* PostgreSQL: `community.postgresql`
-* Terraform: `community.general`
+* [Cryptography](https://galaxy.ansible.com/community/crypto): `community.crypto`
+* [General](https://galaxy.ansible.com/community/general): `community.general`
+* [Kubernetes](https://galaxy.ansible.com/kubernetes/core): `kubernetes.core`
+* [PostgreSQL](https://galaxy.ansible.com/community/postgresql): `community.postgresql`
+* [Terraform](https://galaxy.ansible.com/community/general): `community.general`
 
 ## Troubleshooting
 
