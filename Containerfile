@@ -18,17 +18,17 @@ RUN dnf upgrade -y > /dev/null \
     > /dev/null \
   && dnf clean all
 
-# AWS
+# Cloud: Amazon Web Services (AWS)
 RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/amazon.aws/${ANSIBLE_COLLECTION_AWS_VERSION}/requirements.txt
 
-# Azure
+# Cloud: Azure
 RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/azure/${ANSIBLE_COLLECTION_AZURE_VERSION}/requirements-azure.txt
+
+# Cloud: Google Cloud Platform (GCP)
+RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/google.cloud/${ANSIBLE_COLLECTION_GCP_VERSION}/requirements.txt
 
 # Cryptography
 RUN pip3 install cryptography
-
-# Google Cloud Platform
-RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/google.cloud/${ANSIBLE_COLLECTION_GCP_VERSION}/requirements.txt
 
 # Kubernetes
 RUN pip3 install kubernetes
