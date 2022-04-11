@@ -33,6 +33,11 @@ RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/google
 RUN pip3 install cryptography
 
 # Kubernetes & Helm
+COPY conf/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
+RUN dnf install -y \
+    kubectl \
+    > /dev/null \
+  && dnf clean all
 RUN pip3 install kubernetes
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
   && chmod 700 get_helm.sh \

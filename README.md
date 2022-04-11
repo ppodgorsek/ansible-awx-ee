@@ -1,4 +1,4 @@
-# Ansible AWX Execution Environment with AWS, Azure, GCP, Kubernetes and Terraform
+# Ansible AWX Execution Environment with AWS, Azure, GCP, Kubernetes, Helm and Terraform
 
 ## What is it?
 
