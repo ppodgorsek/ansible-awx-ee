@@ -12,7 +12,7 @@ It is based on the official Ansible AWX EE image and mainly includes:
     * Google Cloud Platform (GCP)
     * Microsoft Azure
 
-* Kubernetes
+* Kubernetes & Helm
 * PostgreSQL 14
 * Terraform 1.1.7
 

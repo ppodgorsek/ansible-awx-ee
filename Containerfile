@@ -6,6 +6,7 @@ LABEL description Ansible AWX Execution Environment container with Cloud provide
 ENV ANSIBLE_COLLECTION_AWS_VERSION		3.2.0
 ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.12.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION		v1.0.1
+ENV HELM_VERSION						v3.8.1
 ENV POSTGRESQL_VERSION                  14
 ENV TERRAFORM_VERSION					1.1.7
 
@@ -14,6 +15,7 @@ USER root
 # Install build dependencies
 RUN dnf upgrade -y > /dev/null \
   && dnf install -y \
+    openssl \
     unzip \
     > /dev/null \
   && dnf clean all
@@ -30,8 +32,12 @@ RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/google
 # Cryptography
 RUN pip3 install cryptography
 
-# Kubernetes
+# Kubernetes & Helm
 RUN pip3 install kubernetes
+RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
+  && chmod 700 get_helm.sh \
+  && ./get_helm.sh --version ${HELM_VERSION} \
+  && rm -f get_helm.sh
 
 # PostgreSQL
 RUN dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm \
@@ -49,12 +55,15 @@ RUN pip3 install psycopg2-binary
 #  && dnf clean all
 
 # Workaround until the Hashicorp repo for RHEL 9 is fixed
-ADD https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip /terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-RUN cd / \
+RUN curl -fsSL -o /terraform_${TERRAFORM_VERSION}_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  && cd / \
   && unzip /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
+  && rm -f /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
   && mv /terraform /usr/local/bin/terraform \
   && chmod ugo+rx /usr/local/bin/terraform
+
+# Fix a bug in the runner's home directory
+RUN chown -R 1000:1000 /home/runner
 
 # Drop back to the regular user (good practice)
 USER 1000
