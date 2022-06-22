@@ -14,7 +14,7 @@ It is based on the official Ansible AWX EE image and mainly includes:
 
 * Kubernetes & Helm
 * PostgreSQL 14
-* Terraform 1.1.7
+* Terraform 1.2.3
 
 ## Versioning
 
