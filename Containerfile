@@ -7,7 +7,7 @@ MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
 ENV ANSIBLE_COLLECTION_AWS_VERSION		3.3.0
-ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.12.0
+ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.13.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION		v1.0.1
 ENV HELM_VERSION						v3.8.1
 ENV POSTGRESQL_VERSION                  14
