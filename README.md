@@ -1,4 +1,4 @@
-# Ansible AWX Execution Environment with AWS, Azure, GCP, Kubernetes, Helm and Terraform
+# Ansible AWX Execution Environment with AWS, Azure, GCP, Kubernetes, Helm, Java and Terraform
 
 ## What is it?
 
@@ -12,6 +12,7 @@ It is based on the official Ansible AWX EE image and mainly includes:
     * Google Cloud Platform (GCP)
     * Microsoft Azure
 
+* Java 17
 * Kubernetes & Helm
 * PostgreSQL 14
 * Terraform 1.2.3
