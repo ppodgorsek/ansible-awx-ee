@@ -10,6 +10,7 @@ ENV ANSIBLE_COLLECTION_AWS_VERSION		3.3.0
 ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.13.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION		1.0.2
 ENV HELM_VERSION						v3.8.1
+ENV JAVA_VERSION						17
 ENV POSTGRESQL_VERSION                  14
 ENV TERRAFORM_VERSION					1.2.3
 
@@ -18,6 +19,7 @@ USER root
 # Install build dependencies
 RUN dnf upgrade -y > /dev/null \
   && dnf install -y \
+    java-${JAVA_VERSION}-openjdk \
     openssl \
     unzip \
     > /dev/null \
