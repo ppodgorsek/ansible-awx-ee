@@ -6,13 +6,13 @@ FROM quay.io/ansible/awx-ee:latest
 MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
-ENV ANSIBLE_COLLECTION_AWS_VERSION		3.3.0
-ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.13.0
+ENV ANSIBLE_COLLECTION_AWS_VERSION		5.1.0
+ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.14.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION		1.0.2
-ENV HELM_VERSION						v3.8.1
+ENV HELM_VERSION						v3.10.2
 ENV JAVA_VERSION						17
 ENV POSTGRESQL_VERSION                  14
-ENV TERRAFORM_VERSION					1.2.3
+ENV TERRAFORM_VERSION					1.3.6
 
 USER root
 
@@ -47,7 +47,8 @@ RUN pip3 install kubernetes
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
   && chmod 700 get_helm.sh \
   && ./get_helm.sh --version ${HELM_VERSION} \
-  && rm -f get_helm.sh
+  && rm -f get_helm.sh \
+  && helm plugin install https://github.com/databus23/helm-diff
 
 # PostgreSQL
 RUN dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm \
