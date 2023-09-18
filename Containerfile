@@ -1,18 +1,18 @@
 # The source of the parent container can be found here:
 # https://github.com/ansible/awx-ee
 
-FROM quay.io/ansible/awx-ee:latest
+FROM quay.io/ansible/awx-ee:23.1.0
 
 MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
-ENV ANSIBLE_COLLECTION_AWS_VERSION		5.1.0
-ENV ANSIBLE_COLLECTION_AZURE_VERSION	v1.13.0
-ENV ANSIBLE_COLLECTION_GCP_VERSION		1.0.2
-ENV HELM_VERSION						v3.10.2
-ENV JAVA_VERSION						17
-ENV POSTGRESQL_VERSION                  14
-ENV TERRAFORM_VERSION					1.3.6
+ENV ANSIBLE_COLLECTION_AWS_VERSION     6.4.0
+ENV ANSIBLE_COLLECTION_AZURE_VERSION   v1.17.0
+ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.2.0
+ENV HELM_VERSION                       v3.12.3
+ENV JAVA_VERSION                       17
+ENV POSTGRESQL_VERSION                 16
+ENV TERRAFORM_VERSION                  1.5.7
 
 USER root
 
@@ -74,7 +74,7 @@ RUN curl -fsSL -o /terraform_${TERRAFORM_VERSION}_linux_amd64.zip https://releas
   && chmod ugo+rx /usr/local/bin/terraform
 
 # Fix a bug in the runner's home directory
-RUN chown -R 1000:1000 /home/runner
+RUN chown -R 1000:1000 /runner
 
 # Drop back to the regular user (good practice)
 USER 1000
