@@ -9,7 +9,7 @@ LABEL description Ansible AWX Execution Environment container with Cloud provide
 ENV ANSIBLE_COLLECTION_AWS_VERSION     7.2.0
 ENV ANSIBLE_COLLECTION_AZURE_VERSION   v1.19.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.3.0
-ENV HELM_VERSION                       v3.12.3
+ENV HELM_VERSION                       v3.14.0
 ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 16
 ENV TERRAFORM_VERSION                  1.7.3
@@ -39,9 +39,7 @@ RUN pip3 install cryptography
 
 # Kubernetes & Helm
 COPY conf/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
-RUN dnf install -y \
-    kubectl \
-    > /dev/null \
+RUN dnf install -y kubectl \
   && dnf clean all
 RUN pip3 install kubernetes
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
@@ -61,9 +59,7 @@ RUN pip3 install psycopg2-binary
 # Official documentation: https://developer.hashicorp.com/terraform/install
 RUN yum install -y yum-utils \
   && yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
-  && yum install -y \
-    terraform \
-    > /dev/null \
+  && yum install -y terraform \
   && yum clean all
 
 # Fix a bug in the runner's home directory
