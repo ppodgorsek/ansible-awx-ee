@@ -6,7 +6,7 @@ FROM quay.io/ansible/awx-ee:23.7.0
 MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
-ENV ANSIBLE_COLLECTION_AWS_VERSION     6.4.0
+ENV ANSIBLE_COLLECTION_AWS_VERSION     7.2.0
 ENV ANSIBLE_COLLECTION_AZURE_VERSION   v1.17.0
 ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.2.0
 ENV HELM_VERSION                       v3.12.3
