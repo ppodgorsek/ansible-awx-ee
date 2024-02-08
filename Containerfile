@@ -1,18 +1,18 @@
 # The source of the parent container can be found here:
 # https://github.com/ansible/awx-ee
 
-FROM quay.io/ansible/awx-ee:23.1.0
+FROM quay.io/ansible/awx-ee:23.7.0
 
 MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
-ENV ANSIBLE_COLLECTION_AWS_VERSION     6.4.0
-ENV ANSIBLE_COLLECTION_AZURE_VERSION   v1.17.0
-ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.2.0
-ENV HELM_VERSION                       v3.12.3
-ENV JAVA_VERSION                       17
+ENV ANSIBLE_COLLECTION_AWS_VERSION     7.2.0
+ENV ANSIBLE_COLLECTION_AZURE_VERSION   v1.19.0
+ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.3.0
+ENV HELM_VERSION                       v3.14.0
+ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 16
-ENV TERRAFORM_VERSION                  1.5.7
+ENV TERRAFORM_VERSION                  1.7.3
 
 USER root
 
@@ -39,9 +39,7 @@ RUN pip3 install cryptography
 
 # Kubernetes & Helm
 COPY conf/kubernetes.repo /etc/yum.repos.d/kubernetes.repo
-RUN dnf install -y \
-    kubectl \
-    > /dev/null \
+RUN dnf install -y kubectl \
   && dnf clean all
 RUN pip3 install kubernetes
 RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/${HELM_VERSION}/scripts/get-helm-3 \
@@ -58,20 +56,11 @@ RUN dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x
 RUN pip3 install psycopg2-binary
 
 # Terraform
-# Official documentation: https://www.terraform.io/downloads
-#RUN yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
-#  && dnf install -y \
-#    terraform \
-#    > /dev/null \
-#  && dnf clean all
-
-# Workaround until the Hashicorp repo for RHEL 9 is fixed
-RUN curl -fsSL -o /terraform_${TERRAFORM_VERSION}_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && cd / \
-  && unzip /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && rm -f /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && mv /terraform /usr/local/bin/terraform \
-  && chmod ugo+rx /usr/local/bin/terraform
+# Official documentation: https://developer.hashicorp.com/terraform/install
+RUN yum install -y yum-utils \
+  && yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
+  && yum install -y terraform \
+  && yum clean all
 
 # Fix a bug in the runner's home directory
 RUN chown -R 1000:1000 /runner
