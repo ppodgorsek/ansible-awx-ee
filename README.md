@@ -1,5 +1,19 @@
 # Ansible AWX Execution Environment with AWS, Azure, GCP, Kubernetes, Helm, Java and Terraform
 
+## Table of contents
+
+* [What is it?](#what-is-it)
+* [Versioning](#versioning)
+* [AWX configuration](#awx-configuration)
+* [Installation details](#installation-details)
+* [Troubleshooting](#troubleshooting)
+    * [Job is not using the correct execution environment](#job-is-not-using-the-correct-execution-environment)
+* [Please contribute!](#please-contribute)
+
+-----
+
+<a name="what-is-it"></a>
+
 ## What is it?
 
 This project contains the configuration of an Ansible AWX Execution Environment container image with commonly used libraries.
@@ -17,12 +31,16 @@ It is based on the official Ansible AWX EE image and mainly includes:
 * PostgreSQL 16
 * Terraform 1.7.3
 
+<a name="versioning"></a>
+
 ## Versioning
 
 The versioning of this project follows the one of the official Ansible AWX EE containers.
 
 * If based on an existing AWX EE tag, the release will be the same as the EE one.
 * If based on the latest EE tag, the release will have a `-SNAPSHOT` suffix to indicate the changing nature of the parent.
+
+<a name="awx-configuration"></a>
 
 ## AWX configuration
 
@@ -36,6 +54,8 @@ This image can be set up in AWX by:
     * Pull policy: `Only pull if not present before running`
 
 3. Applying the execution environment on the relevant job templates.
+
+<a name="installation-details"></a>
 
 ## Installation details
 
@@ -65,13 +85,19 @@ Depending on your needs, the following collections are supported and can be adde
 * [PostgreSQL](https://galaxy.ansible.com/community/postgresql): `community.postgresql`
 * [Terraform](https://galaxy.ansible.com/community/general): `community.general`
 
+<a name="troubleshooting"></a>
+
 ## Troubleshooting
+
+<a name="job-is-not-using-the-correct-execution-environment"></a>
 
 ### Job is not using the correct execution environment
 
 Upon running a job, errors might appear which seem to be pointing to missing dependencies.
 
 This is a common misconfiguration, remember to make sure your job templates are using the correct execution environment.
+
+<a name="please-contribute"></a>
 
 ## Please contribute!
 
