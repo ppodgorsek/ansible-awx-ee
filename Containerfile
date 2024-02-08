@@ -1,7 +1,7 @@
 # The source of the parent container can be found here:
 # https://github.com/ansible/awx-ee
 
-FROM quay.io/ansible/awx-ee:23.1.0
+FROM quay.io/ansible/awx-ee:23.7.0
 
 MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
