@@ -12,7 +12,7 @@ ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.3.0
 ENV HELM_VERSION                       v3.12.3
 ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 16
-ENV TERRAFORM_VERSION                  1.5.7
+ENV TERRAFORM_VERSION                  1.7.3
 
 USER root
 
@@ -58,20 +58,13 @@ RUN dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x
 RUN pip3 install psycopg2-binary
 
 # Terraform
-# Official documentation: https://www.terraform.io/downloads
-#RUN yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
-#  && dnf install -y \
-#    terraform \
-#    > /dev/null \
-#  && dnf clean all
-
-# Workaround until the Hashicorp repo for RHEL 9 is fixed
-RUN curl -fsSL -o /terraform_${TERRAFORM_VERSION}_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && cd / \
-  && unzip /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && rm -f /terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
-  && mv /terraform /usr/local/bin/terraform \
-  && chmod ugo+rx /usr/local/bin/terraform
+# Official documentation: https://developer.hashicorp.com/terraform/install
+RUN yum install -y yum-utils \
+  && yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
+  && yum install -y \
+    terraform \
+    > /dev/null \
+  && yum clean all
 
 # Fix a bug in the runner's home directory
 RUN chown -R 1000:1000 /runner
