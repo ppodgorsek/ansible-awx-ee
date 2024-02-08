@@ -1,0 +1,30 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - main
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - '*'
+
+  # Run tests for any PRs.
+  pull_request:
+
+env:
+  # The image name
+  IMAGE_NAME: ppodgorsek/ansible-awx-ee:ci
+
+jobs:
+  # Build and run tests.
+  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build image
+        run:
+          podman build . --tag $IMAGE_NAME --file Containerfile
