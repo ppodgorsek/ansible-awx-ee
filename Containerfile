@@ -3,7 +3,7 @@
 
 FROM quay.io/ansible/awx-ee:24.6.1
 
-MAINTAINER Paul Podgorsek <ppodgorsek@users.noreply.github.com>
+MAINTAINER Paul Podgorsek
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
 ENV ANSIBLE_COLLECTION_AWS_VERSION     8.1.0
@@ -12,7 +12,7 @@ ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.3.0
 ENV HELM_VERSION                       v3.15.4
 ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 16
-ENV TERRAFORM_VERSION                  1.7.3
+ENV TERRAFORM_VERSION                  1.9.5
 
 USER root
 
@@ -59,7 +59,7 @@ RUN pip3 install psycopg2-binary
 # Official documentation: https://developer.hashicorp.com/terraform/install
 RUN yum install -y yum-utils \
   && yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo \
-  && yum install -y terraform \
+  && yum install -y terraform-${TERRAFORM_VERSION}* \
   && yum clean all
 
 # Fix a bug in the runner's home directory
