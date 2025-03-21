@@ -25,6 +25,9 @@ RUN dnf upgrade -y > /dev/null \
     > /dev/null \
   && dnf clean all
 
+# Ensure the latest version of Ansible is used
+RUN pip3 install ansible-core --upgrade
+
 # Cloud: Amazon Web Services (AWS)
 RUN pip3 install -r https://raw.githubusercontent.com/ansible-collections/amazon.aws/${ANSIBLE_COLLECTION_AWS_VERSION}/requirements.txt
 
