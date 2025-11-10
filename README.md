@@ -28,8 +28,8 @@ It is based on the official Ansible AWX EE image and mainly includes:
 
 * Java 21
 * Kubernetes & Helm
-* PostgreSQL 17
-* Terraform 1.12.1
+* PostgreSQL 18
+* Terraform 1.13.5
 
 <a name="versioning"></a>
 

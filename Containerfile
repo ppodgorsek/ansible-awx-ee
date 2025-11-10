@@ -6,13 +6,13 @@ FROM quay.io/ansible/awx-ee:24.6.1
 LABEL author      Paul Podgorsek
 LABEL description Ansible AWX Execution Environment container with Cloud providers, Terraform, Kubernetes and other common tools.
 
-ENV ANSIBLE_COLLECTION_AWS_VERSION     10.1.0
-ENV ANSIBLE_COLLECTION_AZURE_VERSION   v3.4.0
-ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.5.3
-ENV HELM_VERSION                       v3.18.2
+ENV ANSIBLE_COLLECTION_AWS_VERSION     10.1.2
+ENV ANSIBLE_COLLECTION_AZURE_VERSION   v3.10.1
+ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.9.0
+ENV HELM_VERSION                       v3.19.0
 ENV JAVA_VERSION                       21
-ENV POSTGRESQL_VERSION                 17
-ENV TERRAFORM_VERSION                  1.12.1
+ENV POSTGRESQL_VERSION                 18
+ENV TERRAFORM_VERSION                  1.13.5
 
 USER root
 
