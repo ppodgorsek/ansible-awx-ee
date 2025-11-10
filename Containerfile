@@ -12,7 +12,7 @@ ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.5.3
 ENV HELM_VERSION                       v3.18.2
 ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 17
-ENV TERRAFORM_VERSION                  1.12.1
+ENV TERRAFORM_VERSION                  1.13.5
 
 USER root
 
