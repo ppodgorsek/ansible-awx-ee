@@ -8,7 +8,7 @@ LABEL description Ansible AWX Execution Environment container with Cloud provide
 
 ENV ANSIBLE_COLLECTION_AWS_VERSION     10.1.2
 ENV ANSIBLE_COLLECTION_AZURE_VERSION   v3.10.1
-ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.5.3
+ENV ANSIBLE_COLLECTION_GCP_VERSION     v1.9.0
 ENV HELM_VERSION                       v3.18.2
 ENV JAVA_VERSION                       21
 ENV POSTGRESQL_VERSION                 18
